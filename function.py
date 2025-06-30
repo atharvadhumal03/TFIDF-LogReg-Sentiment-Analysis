@@ -1,3 +1,50 @@
+from bs4 import BeautifulSoup
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import re
+
+def text_preprocessing(text):
+
+    #parsing html tags
+    text = BeautifulSoup(text, 'lxml').get_text()
+    
+    #lowercasing
+    text = text.lower()
+
+    #handling punctuations and special characters
+    text = re.sub(r'[^a-zA-Z\s]', '', text)
+
+    #returning preprocessed text
+    return text
+
+def tokenize(text):
+
+    #tokenization
+    tokens = word_tokenize(text)
+
+    #returning tokens
+    return tokens
+
+def stop_words_removal(tokens):
+    stop_words = stopwords.words("english")
+    new_tokens = []
+    for word in tokens:
+        if word.lower() not in stop_words:
+            new_tokens.append(word)
+    
+    return new_tokens
+def lemmatizer(word):
+    lemmatizer = WordNetLemmatizer()
+    lemmatized = []
+    for x in word:
+        result = lemmatizer.lemmatize(x)
+        lemmatized.append(result)
+    return lemmatized
+
+def final_text(tokens):
+    return " ".join(tokens)
+
 def full_text_preprocessing(text):
 
     if isinstance(text, list):
