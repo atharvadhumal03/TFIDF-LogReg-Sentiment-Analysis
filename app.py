@@ -1,15 +1,61 @@
 import pickle
-import streamlit
+import streamlit as st
 from function import full_text_preprocessing
-
-docs = ["i Hate T!his @movie so 2332much", "i lo00ve thiS! moviE", "1this was ??suCh a waS$te of 8time", "tHi$$S was niCe ill be BaCk"]
-
-X_new = full_text_preprocessing(docs)
-print(X_new)
 
 with open("model.pkl", "rb") as file:
     pipeline = pickle.load(file)
 
+#1e1d1d
+st.markdown(
+"""
+    <style>
+    .stApp {
+        background-color: #262e36;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+st.markdown("<h2 style='text-align: center;'>🎬 IMDB Movie Review Sentiment Classifier</h2>", unsafe_allow_html=True)
+st.markdown(
+    "<p style='text-align: left; font-size:18px;'>This is a movie review classifier. "
+    "Enter a review of a movie you recently watched to see whether it's classified as positive😁 or negative😔.</p>",
+    unsafe_allow_html=True
+)
 
-new_pred = pipeline.predict(X_new)
-print(new_pred)
+user_review = st.text_area("Enter your movie review below ⬇️ :", height=80)
+
+if 'show_confirm' not in st.session_state:
+    st.session_state.show_confirm = False
+
+if 'show_result' not in st.session_state:
+    st.session_state.show_result = False
+
+# Submit button
+if st.button("Submit Review"):
+    if user_review.strip() != "":
+        st.session_state.show_confirm = True
+        st.session_state.show_result = False
+    else:
+        st.warning("Please enter a review before submitting.")
+
+# Display review and confirm button
+if st.session_state.show_confirm:
+    st.markdown("**Please confirm the review you have entered ⬇️ :**")
+    st.write(user_review)
+    if st.button("Confirm and Predict"):
+        st.session_state.show_result = True
+
+if st.session_state.show_result:
+    # Replace this with actual model prediction
+    X_new = full_text_preprocessing(user_review)
+    
+    if X_new and X_new[0].strip() != "":
+        sentiment = pipeline.predict(X_new)[0]
+
+        if sentiment == 'positive':
+            st.success(f"Predicted Sentiment: ⭐️ Positive!")
+        else:
+            st.success(f"Predicted Sentiment: 💔 Negative!")
+    else:
+        st.warning(f"⚠️ Please enter a valid review with meaningful content.")
