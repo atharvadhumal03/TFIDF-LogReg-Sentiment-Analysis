@@ -1,9 +1,7 @@
+beautifulsoup4
 pandas
 numpy
 scikit-learn
 nltk
-beautifulsoup4
 lxml
 streamlit
-beautifulsoup4
-pickle
