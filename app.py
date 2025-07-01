@@ -5,7 +5,17 @@ from function import full_text_preprocessing
 with open("model.pkl", "rb") as file:
     pipeline = pickle.load(file)
 
-#1e1d1d
+# GUI code
+st.markdown(
+    """
+    
+    <div style='text-align: center; color: gray; font-size: 13px;'>
+        © Atharva Dhumal | A movie review sentiment classifier using TF-IDF and Logistic Regression.
+    </div>
+    <hr style="margin-top: 20px;"/>
+    """,
+    unsafe_allow_html=True
+)
 st.markdown(
 """
     <style>
@@ -54,8 +64,8 @@ if st.session_state.show_result:
         sentiment = pipeline.predict(X_new)[0]
 
         if sentiment == 'positive':
-            st.success(f"Predicted Sentiment: ⭐️ Positive!")
+            st.success(f"Predicted Sentiment: Positive!", icon="⭐️")
         else:
-            st.success(f"Predicted Sentiment: 💔 Negative!")
+            st.info(f"Predicted Sentiment: Negative!", icon="💔")
     else:
         st.warning(f"⚠️ Please enter a valid review with meaningful content.")
