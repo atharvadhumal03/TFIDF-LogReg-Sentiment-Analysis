@@ -1,8 +1,12 @@
+import re
 from bs4 import BeautifulSoup
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-import re
+import nltk
+nltk.download('punkt', quiet=True)
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
 
 def text_preprocessing(text):
 
@@ -19,7 +23,7 @@ def text_preprocessing(text):
     return text
 
 def tokenize(text):
-
+    
     #tokenization
     tokens = word_tokenize(text)
 
