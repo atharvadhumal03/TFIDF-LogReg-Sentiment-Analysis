@@ -55,7 +55,7 @@ def full_text_preprocessing(text):
         processed_list = []
         for t in text:
             processed_item = full_text_preprocessing(t)
-            processed_list.append(processed_item[0])  #extract the from the returned list as recursion output gives final_doc = [[]].
+            processed_list.append(processed_item[0])  #extract the preprocessed data from the returned list as recursion output gives final_doc = [[]].
         return processed_list
 
 
