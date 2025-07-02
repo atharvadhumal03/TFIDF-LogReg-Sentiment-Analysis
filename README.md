@@ -32,8 +32,15 @@ The application is deployed on Streamlit Cloud and can be accessed at:
 
 ## 🖼️ Screenshots
 ### Web Application Interface
-![screenshots/project_GUI.png]
+![App Interface](screenshots/project_GUI.png)
 *Clean and intuitive user interface for sentiment analysis*
+
+### Prediction Examples
+![Positive Review](screenshots/positive.png)
+*Positive Movie Review*
+
+![Negative Review](screenshots/negative.png)
+*Negative Movie Review*
 
 ## ⚙️ Methodology
 ### Data Preprocessing Pipeline:
